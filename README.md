@@ -85,6 +85,13 @@ affinity: []
 
 ---
 
+## 🧹 Delete unnecessary files from the default chart
+
+```bash
+rm chart/templates/hpa.yaml chart/templates/ingress.yaml chart/templates/serviceaccount.yaml chart/templates/tests/test-connection.yaml
+```
+---
+
 ## 🚀 Deploy with Helm
 
 ```bash
@@ -98,7 +105,7 @@ helm upgrade hello-spyros ./chart
 ```
 ---
 
-## To access it:
+## 🌐 Access the App:
 
 ```bash
 minikube service hello-spyros --url
