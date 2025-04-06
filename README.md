@@ -1,4 +1,4 @@
-# 🚀 Hello Spyros Web App
+# 🚀 Hello Web App
 
 This repository contains a **simple customizable web application** that displays "Hello, <name>" where the name is configurable via Helm values.
 
