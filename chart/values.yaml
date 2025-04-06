@@ -1,36 +1,28 @@
-# Configuration for the deployment of the application
-# 
-# replicaCount: Number of replicas for the application.
-# 
+
+# Configuration file for the Helm chart deployment of the web application.
+
+# replicaCount: Number of replicas for the application deployment.
 # image:
-#   repository: The Docker image repository for the application.
-#   pullPolicy: The image pull policy (e.g., Always, IfNotPresent).
-#   tag: The tag of the Docker image to use.
-# 
+#   repository: Docker image repository for the application.
+#   pullPolicy: Image pull policy (e.g., Always, IfNotPresent).
+#   tag: Tag of the Docker image to be used.
 # env:
-#   name: The environment variable specifying the name to be used in the application.
-# 
+#   name: Environment variable to set the application name.
 # service:
-#   type: The type of Kubernetes service (e.g., ClusterIP, NodePort, LoadBalancer).
-#   port: The port on which the service is exposed.
-# 
+#   name: Name of the service.
+#   type: Type of the service (e.g., ClusterIP, NodePort, LoadBalancer).
+#   port: Port on which the service will be exposed.
 # serviceAccount:
-#   create: Specifies whether a service account should be created.
-#   name: The name of the service account to use. Leave empty to use the default.
-# 
+#   create: Boolean to specify whether to create a new service account.
+#   name: Name of the service account to use (leave empty for default).
 # ingress:
-#   enabled: Specifies whether ingress is enabled for the application.
-# 
-# resources: Resource requests and limits for the application. Leave empty for default.
-# 
+#   enabled: Boolean to enable or disable ingress configuration.
+# resources: Resource requests and limits for the application (CPU, memory).
 # autoscaling:
-#   enabled: Specifies whether autoscaling is enabled for the application.
-# 
-# nodeSelector: Node selector for scheduling the application pods.
-# 
-# tolerations: Tolerations for scheduling the application pods on tainted nodes.
-# 
-# affinity: Affinity rules for scheduling the application pods.
+#   enabled: Boolean to enable or disable horizontal pod autoscaling.
+# nodeSelector: Node selector for scheduling the pods on specific nodes.
+# tolerations: Tolerations for scheduling pods on tainted nodes.
+# affinity: Affinity rules for scheduling pods on specific nodes.
 replicaCount: 1
 
 image:
@@ -42,6 +34,7 @@ env:
   name: Spyros
 
 service:
+  name: webapp
   type: NodePort
   port: 5000
 

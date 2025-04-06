@@ -83,6 +83,11 @@ affinity: []
               value: "{{ .Values.env.name }}"
 ```
 
+- `chart/templates/service.yaml`: Update servicename
+
+```yaml
+  name: {{ .Values.service.name }}
+```
 ---
 
 ## 🧹 Delete unnecessary files from the default chart
