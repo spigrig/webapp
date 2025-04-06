@@ -11,21 +11,58 @@ This repository contains a **simple customizable web application** that displays
 ├── app/                      # Python app and Dockerfile
 │   ├── Dockerfile
 │   └── app.py
-└── chart/                    # Helm chart for deploying the app
+├── chart/                    # Helm chart for deploying the app
+│   ├── values.yaml
+│   └── templates/
+├── Makefile                  # Automates image build, push, and Helm value updates
+└── README.md
 ```
 
 ---
 
-## 🐳 Build and Push Docker Image
+## 🐳 Docker Image Build & Push (with Versioning)
 
-Ensure Docker is running and you're logged into DockerHub:
+To **build**, **tag**, and **push** a Docker image with a specific version, and also update the Helm chart:
+
+Bump the VERSION in makefile
 
 ```bash
-cd webapp/app
-docker context use default
-docker build -t spigrig/hello-spyros:latest .
-docker push spigrig/hello-spyros:latest
+make deploy
 ```
+
+This will:
+1. Build the image: `docker build -t spigrig/hello-spyros:<VERSION>> app`
+2. Push it to Docker Hub
+3. Update `chart/values.yaml` to set the image tag to `<VERSION>`
+
+Push the changes to the git repo
+
+ArgoCD will automatically sync with the Git repo. However:
+- It only detects **Git repo changes**, not new Docker images with the same tag.
+- To deploy new images, update the tag in `values.yaml` with make deploy and push the changes to the git repo.
+---
+
+## 🔁 When to Update What
+
+| **Change Type**         | **Requires New Image?** | **Requires Git Commit & Push?** | **ArgoCD Action**                  |
+|-------------------------|--------------------------|----------------------------------|------------------------------------|
+| Code change (e.g. `app.py`) | ✅ Yes                   | ✅ Yes                           | ArgoCD detects new chart tag and redeploys |
+| Environment value change (`env.name` in `values.yaml`) | ❌ No                    | ✅ Yes                           | ArgoCD detects chart change and redeploys |
+| Port/replica change     | ❌ No                    | ✅ Yes                           | ArgoCD redeploys with new values   |
+| Docker base image or dependencies | ✅ Yes           | ✅ Yes                           | Requires image rebuild & chart update |
+| Helm logic changes (e.g., new template logic) | ❌ Usually not            | ✅ Yes                           | ArgoCD redeploys chart              |
+
+---
+
+## 🧪 Access the Application
+
+After deployment:
+
+```bash
+minikube service webapp --url
+```
+
+Open the URL in your browser to view your app.
 
 ---
 
@@ -49,7 +86,7 @@ replicaCount: 1
 image:
   repository: spigrig/hello-spyros
   pullPolicy: IfNotPresent
-  tag: latest
+  tag: v1.0.0
 
 env:
   name: Spyros
