@@ -21,7 +21,7 @@
 #     Pushes the Docker image, updates the Helm chart, and prints a deployment confirmation message.
 #     - Depends on: push, update-chart
 #     - Command: `@echo "Deployment updated to version $(VERSION)"`
-VERSION ?= v1.0.2
+VERSION ?= v1.0.3
 
 build:
 	docker build -t spigrig/hello-spyros:$(VERSION) app

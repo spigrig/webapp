@@ -28,7 +28,7 @@ replicaCount: 1
 image:
   repository: spigrig/hello-spyros
   pullPolicy: IfNotPresent
-  tag: v1.0.2
+  tag: v1.0.3
 
 env:
   name: Spyrostest3
