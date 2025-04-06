@@ -78,9 +78,9 @@ affinity: []
 - `chart/templates/deployment.yaml`: Add environment variable inside the container spec after ports section:
 
 ```yaml
-        env:
-        - name: NAME
-          value: "{{ .Values.env.name }}"
+          env:
+            - name: NAME
+              value: "{{ .Values.env.name }}"
 ```
 
 ---
@@ -108,7 +108,7 @@ helm upgrade hello-spyros ./chart
 ## 🌐 Access the App:
 
 ```bash
-minikube service hello-spyros --url
+minikube service hello-spyros-chart --url
 ```
 ---
 
