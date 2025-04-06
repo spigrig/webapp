@@ -42,17 +42,40 @@ Customize these files:
 
 - `chart/values.yaml`:
 
+
 ```yaml
+replicaCount: 1
+
 image:
   repository: spigrig/hello-spyros
-  tag: latest
   pullPolicy: IfNotPresent
+  tag: latest
 
 env:
   name: Spyros
+
+service:
+  type: NodePort
+  port: 5000
+
+serviceAccount:
+  create: false
+  name: ""
+
+ingress:
+  enabled: false
+
+resources: {}
+
+autoscaling:
+  enabled: false
+
+nodeSelector: {}
+tolerations: []
+affinity: []
 ```
 
-- `chart/templates/deployment.yaml`: Add environment variable inside the container spec:
+- `chart/templates/deployment.yaml`: Add environment variable inside the container spec after ports section:
 
 ```yaml
         env:
@@ -73,7 +96,13 @@ Or upgrade if already installed:
 ```bash
 helm upgrade hello-spyros ./chart
 ```
+---
 
+## To access it:
+
+```bash
+minikube service hello-spyros --url
+```
 ---
 
 ## 🧹 Clean Up

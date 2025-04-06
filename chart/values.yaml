@@ -1,14 +1,29 @@
-# Default values for chart.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 replicaCount: 1
 
 image:
   repository: spigrig/hello-spyros
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 
 env:
-  name : Spyros
+  name: Spyros
+
+service:
+  type: NodePort
+  port: 5000
+
+serviceAccount:
+  create: false
+  name: ""
+
+ingress:
+  enabled: false
+
+resources: {}
+
+autoscaling:
+  enabled: false
+
+nodeSelector: {}
+tolerations: []
+affinity: []
