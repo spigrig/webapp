@@ -31,7 +31,7 @@ image:
   tag: latest
 
 env:
-  name: Spyros
+  name: Spyrostest
 
 service:
   name: webapp
