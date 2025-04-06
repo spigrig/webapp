@@ -8,7 +8,6 @@ This repository contains a **simple customizable web application** that displays
 
 ```
 .
-├── README.md                  # Project overview and instructions
 ├── app/                      # Python app and Dockerfile
 │   ├── Dockerfile
 │   └── app.py
