@@ -21,7 +21,7 @@ This repository contains a **simple customizable web application** that displays
 Ensure Docker is running and you're logged into DockerHub:
 
 ```bash
-cd app
+cd webapp/app
 docker context use default
 docker build -t spigrig/hello-spyros:latest .
 docker push spigrig/hello-spyros:latest
@@ -34,7 +34,7 @@ docker push spigrig/hello-spyros:latest
 If not already created:
 
 ```bash
-cd /webapp
+cd webapp
 helm create chart
 ```
 
