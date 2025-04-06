@@ -22,6 +22,7 @@ Ensure Docker is running and you're logged into DockerHub:
 
 ```bash
 cd app
+docker context use default
 docker build -t spigrig/hello-spyros:latest .
 docker push spigrig/hello-spyros:latest
 ```
